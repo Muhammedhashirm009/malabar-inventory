@@ -3,7 +3,10 @@
 @section('content')
 <div class="mb-3" style="display: flex; gap: 8px;">
     <a href="{{ route('sales.index') }}" class="btn btn-outline"><i data-lucide="arrow-left"></i> Back</a>
-    <a href="{{ route('sales.print', $sale) }}" target="_blank" class="btn btn-primary">
+    <a href="{{ route('sales.print', $sale) }}" 
+       onclick="if(window.__TAURI__){ window.location.href = this.href; return false; }"
+       target="_blank" 
+       class="btn btn-primary">
         <i data-lucide="printer"></i> Print Invoice
     </a>
 </div>

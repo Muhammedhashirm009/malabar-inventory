@@ -4,10 +4,14 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "tauri:before-dev": "concurrently \"php artisan serve --port=8741\" \"npm run dev\"",
+        "tauri:dev": "tauri dev",
+        "tauri:build": "tauri build"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
+        "@tauri-apps/cli": "^2.11.2",
         "axios": "^1.11.0",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^2.0.0",

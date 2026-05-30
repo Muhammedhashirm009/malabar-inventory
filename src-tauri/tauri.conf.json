@@ -1,0 +1,55 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Lamya Pro",
+  "version": "0.1.0",
+  "identifier": "com.lamyapro.app",
+  "build": {
+    "frontendDist": "../public",
+    "devUrl": "http://127.0.0.1:8741",
+    "beforeDevCommand": "npm run tauri:before-dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Lamya Pro",
+        "url": "http://127.0.0.1:8741",
+        "fullscreen": true,
+        "visible": false
+      },
+      {
+        "label": "splashscreen",
+        "title": "Lamya Pro",
+        "url": "splashscreen.html",
+        "width": 450,
+        "height": 450,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false,
+        "alwaysOnTop": true,
+        "resizable": false,
+        "center": true,
+        "visible": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "android": {
+      "debugApplicationIdSuffix": ".debug"
+    }
+  }
+}

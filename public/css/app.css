@@ -4,7 +4,7 @@
    ============================================================ */
 
 /* ---------- Google Fonts ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('../fonts/fonts.css');
 
 /* ==========================================================
    1. CSS CUSTOM PROPERTIES
@@ -448,6 +448,26 @@ h4 { font-size: 1.05rem; }
   opacity: 1;
 }
 
+/* Stack form cards sequentially to ensure search dropdowns overlay correctly */
+form .card {
+  position: relative;
+}
+form .card:nth-of-type(1) {
+  z-index: 10;
+}
+form .card:nth-of-type(2) {
+  z-index: 9;
+}
+form .card:nth-of-type(3) {
+  z-index: 8;
+}
+form .card:nth-of-type(4) {
+  z-index: 7;
+}
+form .card:nth-of-type(5) {
+  z-index: 6;
+}
+
 .card-header {
   display: flex;
   align-items: center;
@@ -617,6 +637,32 @@ h4 { font-size: 1.05rem; }
   height: 14px;
 }
 
+.stat-card-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-card-value {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  display: block;
+}
+
+.stat-card-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: block;
+}
+
 /* ==========================================================
    7. TABLES
    ========================================================== */
@@ -671,10 +717,16 @@ tbody tr:hover {
   border-left: 3px solid var(--accent);
 }
 
-tbody td {
+tbody td,
+tfoot td {
   padding: 13px 18px;
   color: var(--text-primary);
   white-space: nowrap;
+}
+
+tfoot tr {
+  border-top: 2px solid var(--border);
+  background: rgba(99, 102, 241, 0.03);
 }
 
 .table-empty {
@@ -2111,4 +2163,74 @@ textarea {
   font-variant-numeric: tabular-nums;
   display: inline-flex;
   align-items: center;
+}
+
+/* ==========================================================
+   CUSTOM CONTEXT MENU & TEXT SELECTION CONTROLS
+   ========================================================== */
+
+/* Disable default text selection on everything except inputs/textareas */
+*, *::before, *::after {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+input, textarea, [contenteditable="true"], input *, textarea * {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+/* Custom Context Menu */
+.custom-context-menu {
+  background: rgba(9, 13, 22, 0.85); /* Premium glassmorphism */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md, 12px);
+  width: 220px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 6px;
+  animation: contextMenuFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes contextMenuFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.context-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  color: var(--text-secondary, #94a3b8);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius-sm, 8px);
+  transition: all 0.2s ease;
+}
+
+.context-menu-item:hover {
+  background: rgba(99, 102, 241, 0.15); /* Accent tint */
+  color: var(--text-primary, #ffffff);
+}
+
+.context-menu-item .context-icon {
+  width: 16px;
+  height: 16px;
+  color: inherit;
+}
+
+.context-menu-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 6px 0;
 }

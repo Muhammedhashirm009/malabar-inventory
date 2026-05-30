@@ -366,7 +366,7 @@
     <div class="control-bar">
         <span>Invoice Preview (A4 Portrait)</span>
         <div>
-            <button class="close-btn" onclick="window.close()">Close Window</button>
+            <button class="close-btn" onclick="if(window.__TAURI__){ history.back(); } else { window.close(); }">Close Window</button>
             <button onclick="window.print()">Print Invoice</button>
         </div>
     </div>

@@ -1,0 +1,29 @@
+[[permission]]
+identifier = "allow-backup-database"
+description = "Allows invoking the backup_database command"
+commands.allow = ["backup_database"]
+
+[[permission]]
+identifier = "allow-minimize-window"
+description = "Allows invoking the minimize_window command"
+commands.allow = ["minimize_window"]
+
+[[permission]]
+identifier = "allow-close-window"
+description = "Allows invoking the close_window command"
+commands.allow = ["close_window"]
+
+[[permission]]
+identifier = "allow-set-backup-directory"
+description = "Allows invoking the set_backup_directory command"
+commands.allow = ["set_backup_directory"]
+
+[[permission]]
+identifier = "allow-get-backup-directory"
+description = "Allows invoking the get_backup_directory command"
+commands.allow = ["get_backup_directory"]
+
+[[permission]]
+identifier = "allow-clear-backup-directory"
+description = "Allows invoking the clear_backup_directory command"
+commands.allow = ["clear_backup_directory"]

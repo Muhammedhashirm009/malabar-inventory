@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamya Pro</title>
+    <!-- Local Fonts for premium typography -->
+    <link rel="stylesheet" href="fonts/fonts.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            background: transparent !important;
+            background-color: transparent !important;
+        }
+        body {
+            color: #f8fafc;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            user-select: none;
+            position: relative;
+        }
+
+        /* Solid opaque main card (curved as a squircle) */
+        .glass-card {
+            background: #090d16; /* 100% solid, opaque dark color */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 96px; /* Beautiful squircle shape */
+            padding: 36px 40px;
+            width: 390px;
+            height: 390px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7); /* Smaller shadow radius to prevent clipping */
+            z-index: 10;
+            animation: fade-in-scale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Logo and Ripple Rings */
+        .logo-container {
+            position: relative;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Expandable ripple waves behind logo */
+        .ripple {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 30px;
+            border: 1.5px solid rgba(139, 92, 246, 0.3);
+            animation: ripple-wave 3s infinite linear;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .ripple-2 {
+            animation-delay: 1.5s;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            border-radius: 30px;
+            padding: 3px;
+            background: linear-gradient(135deg, #3b82f6 0%, #a855f7 50%, #ec4899 100%);
+            box-shadow: 0 10px 24px rgba(139, 92, 246, 0.3);
+            animation: logo-bounce 4s infinite ease-in-out;
+            z-index: 5;
+        }
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 27px;
+        }
+
+        /* Typography */
+        .title {
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin-bottom: 2px;
+            background: linear-gradient(135deg, #ffffff 30%, #93c5fd 70%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            animation: text-glow 4s infinite alternate ease-in-out;
+        }
+        .subtitle {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .parent-company {
+            font-size: 10px;
+            color: #64748b;
+            font-weight: 800;
+            letter-spacing: 2.2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        /* High-fidelity Loader bar */
+        .loader-container {
+            width: 200px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        .loader-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            border-radius: 10px;
+            animation: fill-loader 3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+            position: relative;
+        }
+        /* Shimmer effect inside the loading bar */
+        .loader-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            animation: shimmer 1.5s infinite linear;
+        }
+
+        /* Keyframes */
+        @keyframes float-slow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(15px, 10px) scale(1.08); }
+        }
+        @keyframes fade-in-scale {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes logo-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes ripple-wave {
+            0% {
+                transform: scale(0.9);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.35);
+                opacity: 0;
+            }
+        }
+        @keyframes fill-loader {
+            0% { width: 0%; }
+            5% { width: 10%; }
+            20% { width: 35%; }
+            50% { width: 55%; }
+            80% { width: 85%; }
+            100% { width: 100%; }
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-150%); }
+            100% { transform: translateX(150%); }
+        }
+        @keyframes text-glow {
+            0%, 100% { filter: drop-shadow(0 2px 4px rgba(255,255,255,0)); }
+            50% { filter: drop-shadow(0 2px 8px rgba(139,92,246,0.25)); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Squircle Card (Completely Solid & Opaque) -->
+    <div class="glass-card">
+        <div class="logo-container">
+            <!-- Pulsing rings -->
+            <div class="ripple"></div>
+            <div class="ripple ripple-2"></div>
+            
+            <!-- Logo wrapper -->
+            <div class="logo-wrapper">
+                <img class="logo-img" src="brand_logo.png" alt="Lamya Pro Logo">
+            </div>
+        </div>
+        
+        <h1 class="title">Lamya Pro</h1>
+        <p class="subtitle">Billing • Purchase • Inventory</p>
+        <p class="parent-company">by ERPAGENT</p>
+        
+        <div class="loader-container">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+</body>
+</html>
