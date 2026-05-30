@@ -72,10 +72,9 @@ fn cleanup_stale_php_processes() {
     {
         use std::os::windows::process::CommandExt;
         println!("Cleaning up any stale processes on port 8741...");
-        let _ = Command::new("powershell")
-            .arg("-NoProfile")
-            .arg("-Command")
-            .arg("Get-Process -Id (Get-NetTCPConnection -LocalPort 8741 -ErrorAction SilentlyContinue).OwningProcess -ErrorAction SilentlyContinue | Stop-Process -Force")
+        let _ = Command::new("cmd")
+            .arg("/c")
+            .arg("for /f \"tokens=5\" %a in ('netstat -aon ^| findstr :8741') do taskkill /F /PID %a")
             .creation_flags(0x08000000) // CREATE_NO_WINDOW
             .status();
     }
@@ -412,10 +411,9 @@ pub fn run() {
                 )?;
             }
 
-            start_php_server();
-
             let app_handle = app.handle().clone();
             std::thread::spawn(move || {
+                start_php_server();
                 wait_and_transition(app_handle);
             });
 
